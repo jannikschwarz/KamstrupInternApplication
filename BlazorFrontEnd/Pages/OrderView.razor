@@ -1,0 +1,82 @@
+﻿@page "/OrdersView"
+@using BlazorFrontEnd.Data
+@inject IItemService ItemService;
+@inject IOrderService OrderService
+
+<h2 class="title">View Bought items</h2>
+<p>
+    Filter By Name: <input type="text" @oninput="@((arg)=>FilterByName(arg))" style="width: 150px"/>
+</p>
+
+@if (orderToShow == null || orderToShow.Count != orders.Count)
+{
+    <p>
+        <em>Loading....</em>
+    </p>
+}
+else
+{
+    <div class="row">
+        <div class="col-3">
+            <h5>Buyer</h5>
+        </div>
+        <div class="col-3">
+            <h5>Item</h5>
+        </div>
+        <div class="col-3">
+            <h5>Date</h5>
+        </div>
+        @foreach (var order in orderToShow)
+        {
+            <div class="col-12">
+                <div class="card" style="width: 100%;">
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="card-text">@order.nameOfBuyer</p>
+                        </div>
+                        <div class="col-3">
+                            <p>@order.boughtItem.nameOfItem</p>
+                        </div>
+                        <div class="col-6">
+                            <p>@order.timeOfOrder</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        }
+    </div>
+}
+
+@code
+{
+    public List<Order> orders;
+    public List<Order> orderToShow;
+
+    protected override async Task OnInitializedAsync()
+    {
+        orders = await OrderService.getAllOrdersAsync();
+        orderToShow = orders;
+        foreach (var order in orderToShow)
+        {
+            Console.WriteLine(order.nameOfBuyer + " " + order.boughtItem + " " + order.orderId + " " + order.timeOfOrder);
+        }
+        base.OnInitialized();
+    }
+
+    private void FilterByName(ChangeEventArgs changeEventArgs)
+    {
+        string? filterByName = null;
+        try{
+            filterByName = changeEventArgs.Value.ToString();
+        }catch(Exception e){}
+        if (!string.IsNullOrEmpty(filterByName))
+        {
+            orderToShow = orders.Where(o => o.nameOfBuyer.Equals(filterByName)).ToList();
+        }
+        else
+        {
+            orderToShow = orders;
+        }
+    }
+}

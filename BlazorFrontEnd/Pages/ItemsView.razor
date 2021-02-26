@@ -1,0 +1,64 @@
+﻿@page "/ItemsView"
+@using BlazorFrontEnd.Data
+@inject IItemService ItemService
+@inject IOrderService OrderService
+@inject IJSRuntime JsRuntime
+
+<h2 class="title">View Items for purchase</h2>
+
+@if (itemsToShow == null)
+{
+    <p>
+        <em>Loading....</em>
+    </p>
+}
+else
+{
+    <input type="text" @oninput="@((arg) => @name=arg.Value.ToString())" value="Name of buyer" >
+    <div class="row">
+        @foreach (var item in itemsToShow)
+        {
+            <div class="col-12">
+                <div class="card" style="width: 100%;">
+                    <dib class="row">
+                        <div class="col-6">
+                        <img src="/Images/@item.imageName"/>
+                        </div>
+                        <div class="col-6">
+                            <div class="card-body">
+                                <h5 class="card-title" style="text-decoration: underline">@item.nameOfItem</h5>
+                                <p class="card-text">@item.description</p>
+                                <p>@item.cost DKK</p>
+                                <button class="btn btn-primary" @onclick="@(() => OrderItem(@item))">Order item</button>
+                            </div>
+                        </div>
+                    </dib>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+
+@code
+{
+    public string name { get; set; }
+    public List<Item> items { get; set;}
+    public List<Item> itemsToShow { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        items = await ItemService.getAllItemsAsync();
+        itemsToShow = items;
+        base.OnInitialized();
+    }
+
+    public async Task OrderItem(Item item)
+    {
+        if (!string.IsNullOrEmpty(name))
+        {
+            item.id = itemsToShow.IndexOf(item) + 1;
+            await OrderService.addOrderAsync(item, name);
+        }
+    }
+}
