@@ -1,0 +1,17 @@
+﻿
+using Microsoft.EntityFrameworkCore;
+using RestWebApi.Data.Model;
+
+namespace Database.Db.Context
+{
+    public class DatabaseContext : DbContext
+    {
+        public DbSet<Item> itemsDbSet { get; set; }
+        public DbSet<Order> ordersDbSet { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite(@"Data Source = A:\Rider\Projects\InternApplication\RestWebApi\Main.db");
+        }
+    }
+}

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using RestWebApi.Data.Impl;
 using RestWebApi.Data.Model;
+using RestWebApi.Db;
 
 namespace RestWebApi.Controllers
 {
@@ -11,9 +11,9 @@ namespace RestWebApi.Controllers
     [Route("[Controller]")]
     public class OrdersController : ControllerBase
     {
-        private IOrderService orderService;
+        private IDbOrderService orderService;
 
-        public OrdersController(IOrderService orderService)
+        public OrdersController(IDbOrderService orderService)
         {
             this.orderService = orderService;
         }
@@ -37,7 +37,7 @@ namespace RestWebApi.Controllers
         {
             try
             {
-                await orderService.orderAsync(newOrder);
+                await orderService.addOrderAsync(newOrder);
             }
             catch (Exception e)
             {

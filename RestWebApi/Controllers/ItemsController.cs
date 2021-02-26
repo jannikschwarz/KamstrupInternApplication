@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using RestWebApi.Data.Impl;
 using RestWebApi.Data.Model;
+using RestWebApi.Db;
 
 namespace RestWebApi.Controllers
 {
@@ -11,9 +11,9 @@ namespace RestWebApi.Controllers
     [Route("[Controller]")]
     public class ItemsController : ControllerBase
     {
-        private IItemsService itemsService;
+        private IDbItemService itemsService;
 
-        public ItemsController(IItemsService itemsService)
+        public ItemsController(IDbItemService itemsService)
         {
             this.itemsService = itemsService;
         }
