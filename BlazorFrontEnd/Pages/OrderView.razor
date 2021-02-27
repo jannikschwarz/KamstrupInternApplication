@@ -26,8 +26,7 @@ else
         <div class="col-3">
             <h5>Date</h5>
         </div>
-        @foreach (var order in orderToShow)
-        {
+        @foreach (var order in orderToShow){
             <div class="col-12">
                 <div class="card" style="width: 100%;">
                     <div class="row">
@@ -50,17 +49,13 @@ else
 
 @code
 {
-    public List<Order> orders;
-    public List<Order> orderToShow;
+    public List<Order> orders { get; set; }
+    public List<Order> orderToShow { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         orders = await OrderService.getAllOrdersAsync();
         orderToShow = orders;
-        foreach (var order in orderToShow)
-        {
-            Console.WriteLine(order.nameOfBuyer + " " + order.boughtItem + " " + order.orderId + " " + order.timeOfOrder);
-        }
         base.OnInitialized();
     }
 

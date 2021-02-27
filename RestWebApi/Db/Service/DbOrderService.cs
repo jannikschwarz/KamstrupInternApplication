@@ -14,7 +14,7 @@ namespace RestWebApi.Db
         private DatabaseContext ctx = new DatabaseContext();
         public async Task<List<Order>> getOrdersAsync()
         {
-            List<Order> orders = await ctx.ordersDbSet.ToListAsync();
+            List<Order> orders = await ctx.ordersDbSet.Include(o => o.boughtItem).ToListAsync();
             return orders;
         }
 

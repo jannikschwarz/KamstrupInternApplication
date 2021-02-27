@@ -1,0 +1,32 @@
+﻿version: "3.3"
+services:
+  web:
+    environment:
+      - ASPNETCORE_URLS=http://177.10.10.10:5005
+    build: ./BlazorFrontEnd
+    networks:
+      proj_net:
+        ipv4_address: 177.10.10.10
+    ports:
+      - "5005:5005"
+    depends_on:
+      - api
+    links:
+      - api
+  api:
+    environment:
+      - ASPNETCORE_URLS=http://177.10.10.11:5002
+    build: ./RestWebApi
+    networks:
+      proj_net:
+        ipv4_address: 177.10.10.11
+    ports:
+      - "5002:5002"
+
+networks:
+  proj_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 177.10.10.0/24

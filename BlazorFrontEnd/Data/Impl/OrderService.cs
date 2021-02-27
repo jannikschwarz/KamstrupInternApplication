@@ -12,7 +12,6 @@ namespace BlazorFrontEnd.Data
     {
         private HttpClient client;
         private string uri = "https://LocalHost:5001";
-        private List<Order> orders = new List<Order>();
 
         public OrderService()
         {
@@ -40,8 +39,7 @@ namespace BlazorFrontEnd.Data
             Task<string> stringAsync = client.GetStringAsync(uri + "/Orders");
             string message = await stringAsync;
             List<Order> result = JsonSerializer.Deserialize<List<Order>>(message);
-            orders = result;
-            return orders;
+            return result;
         }
     }
 }

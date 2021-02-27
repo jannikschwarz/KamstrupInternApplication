@@ -98,19 +98,15 @@ using BlazorFrontEnd.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 52 "A:\Rider\Projects\InternApplication\BlazorFrontEnd\Pages\OrderView.razor"
+#line 51 "A:\Rider\Projects\InternApplication\BlazorFrontEnd\Pages\OrderView.razor"
  
-    public List<Order> orders;
-    public List<Order> orderToShow;
+    public List<Order> orders { get; set; }
+    public List<Order> orderToShow { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         orders = await OrderService.getAllOrdersAsync();
         orderToShow = orders;
-        foreach (var order in orderToShow)
-        {
-            Console.WriteLine(order.nameOfBuyer + " " + order.boughtItem + " " + order.orderId + " " + order.timeOfOrder);
-        }
         base.OnInitialized();
     }
 
