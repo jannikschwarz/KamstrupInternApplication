@@ -11,6 +11,5 @@ RUN dotnet publish -c release -o /app --no-restore
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
 COPY --from=build /app ./
-RUN ls -l
 
 ENTRYPOINT ["dotnet", "BlazorFrontEnd.dll"]
