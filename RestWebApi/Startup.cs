@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using RestWebApi.Db;
+using RestWebApi.NetWorking;
 
 namespace RestWebApi
 {
@@ -29,8 +29,7 @@ namespace RestWebApi
         {
 
             services.AddControllers();
-            services.AddScoped<IDbItemService, DbItemService>();
-            services.AddScoped<IDbOrderService, DbOrderService>();
+            services.AddScoped<ISocketToDb, SocketToDb>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

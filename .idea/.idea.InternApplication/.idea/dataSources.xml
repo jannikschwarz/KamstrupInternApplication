@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Main" uuid="9477f2ab-80a9-4648-b3af-2d32a9d21e5f">
+    <data-source source="LOCAL" name="Main" uuid="1a68d1e9-aace-4764-aa80-8697544b6b2b">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:A:\Rider\Projects\InternApplication\RestWebApi\Main.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:A:\Rider\Projects\InternApplication\DataBase\Main.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
         <library>
