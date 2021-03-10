@@ -22,6 +22,7 @@ namespace RestWebApi
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseUrls("http://localHost:80", "https://localHost:443");
                 });
     }
 }

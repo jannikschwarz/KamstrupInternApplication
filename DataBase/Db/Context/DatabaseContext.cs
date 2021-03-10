@@ -11,7 +11,7 @@ namespace Database.Db.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"Data Source = Main.db");
+            optionsBuilder.UseSqlite(@"Data Source = A:\Rider\Projects\InternApplication\DataBase\Main.db");
         }
     }
 }

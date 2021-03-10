@@ -10,7 +10,7 @@ namespace RestWebApi.NetWorking
     {
         public object getItems()
         {
-            TcpClient client = new TcpClient("127.0.0.1", 2920);
+            TcpClient client = new TcpClient("177.10.10.12", 2920);
             NetworkStream stream = client.GetStream();
 
             byte[] datToServer = Encoding.ASCII.GetBytes("GetItems");
@@ -28,7 +28,7 @@ namespace RestWebApi.NetWorking
 
         public object getOrders()
         {
-            TcpClient client = new TcpClient("127.0.0.1", 2920);
+            TcpClient client = new TcpClient("177.10.10.12", 2920);
             NetworkStream stream = client.GetStream();
 
             byte[] datToServer = Encoding.ASCII.GetBytes("GetOrders");
@@ -46,17 +46,20 @@ namespace RestWebApi.NetWorking
 
         public void addOrder(Order order)
         {
-            TcpClient client = new TcpClient("127.0.0.1", 2920);
+            TcpClient client = new TcpClient("177.10.10.12", 2920);
             NetworkStream stream = client.GetStream();
 
-            byte[] datToServer = Encoding.ASCII.GetBytes("AddOrder");
-            stream.Write(datToServer,0,datToServer.Length);
+            byte[] dataToServer = Encoding.ASCII.GetBytes("AddOrder");
+            stream.Write(dataToServer,0,dataToServer.Length);
 
             byte[] dataFromServer = new byte[1024];
             int bytesRead = stream.Read(dataFromServer, 0, dataFromServer.Length);
             string respone = Encoding.ASCII.GetString(dataFromServer, 0, bytesRead);
-            IList<Item> request = JsonSerializer.Deserialize<IList<Item>>(respone);
-            
+            if (respone.Equals("Received"))
+            {
+                dataToServer = Encoding.ASCII.GetBytes(JsonSerializer.Serialize(order));
+                stream.Write(dataToServer,0,dataToServer.Length);
+            }
             stream.Close();
             client.Close();
         }

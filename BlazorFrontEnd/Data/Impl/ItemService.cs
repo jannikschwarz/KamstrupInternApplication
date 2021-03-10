@@ -11,7 +11,7 @@ namespace BlazorFrontEnd.Data
     public class ItemService : IItemService
     {
         private readonly HttpClient client;
-        private string uri = "http://177.10.10.11:5002/";
+        private string uri = "http://localhost/";
 
         public ItemService()
         {

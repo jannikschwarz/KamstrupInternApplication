@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
@@ -21,7 +22,7 @@ namespace DataBase.Networking
 
         public async void start()
         {
-            IPAddress ip = IPAddress.Parse("127.0.0.1");
+            IPAddress ip = IPAddress.Parse("177.10.10.12");
             TcpListener listener = new TcpListener(ip, 2920);
             listener.Start();
 
@@ -54,6 +55,7 @@ namespace DataBase.Networking
                         byte[] orderFromClient = new byte[1024];
                         int orderRead = stream.Read(orderFromClient, 0, orderFromClient.Length);
                         string orderString = Encoding.ASCII.GetString(orderFromClient, 0, orderRead);
+                        Console.WriteLine(orderString);
                         Order toAdd = JsonSerializer.Deserialize<Order>(orderString);
                         await orderService.addOrderAsync(toAdd);
                         content = "Order added: " + toAdd.nameOfBuyer;

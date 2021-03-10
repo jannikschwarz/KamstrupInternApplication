@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using DataBase.Db;
 using Database.Db.Context;
+using DataBase.Networking;
 using Model;
+using RestWebApi.Db;
 
 namespace DataBase
 {
@@ -18,6 +21,10 @@ namespace DataBase
                     Seed(databaseContext);
                 }
             }
+            IDbItemService itemService = new DbItemService();
+            IDbOrderService orderService = new DbOrderService();
+            Server server = new Server(itemService, orderService);
+            server.start();
         }
         
         private static async Task Seed(DatabaseContext ctx)

@@ -2,26 +2,36 @@
 services:
   web:
     environment:
-      - ASPNETCORE_URLS=http://177.10.10.10:5005
+      - ASPNETCORE_URLS=http://0.0.0.0:80
     build: ./BlazorFrontEnd
     networks:
       proj_net:
         ipv4_address: 177.10.10.10
     ports:
-      - "5005:5005"
+      - "80:80"
     depends_on:
       - api
     links:
       - api
   api:
     environment:
-      - ASPNETCORE_URLS=http://177.10.10.11:5002
+      - ASPNETCORE_URLS=http://0.0.0.0:80
     build: ./RestWebApi
     networks:
       proj_net:
-        ipv4_address: 177.10.10.11
+        ipv4_address: 177.10.10.11:80
     ports:
-      - "5002:5002"
+      - "80:80"
+  db:
+    environment:
+      - ASPNETCORE_URLS=http://0.0.0.0:2920
+    build: ./DataBase
+    networks:
+      proj_net:
+        ipv4_address: 177.10.10.12:2920
+    ports:
+      - "2920:2920"
+    
 
 networks:
   proj_net:
