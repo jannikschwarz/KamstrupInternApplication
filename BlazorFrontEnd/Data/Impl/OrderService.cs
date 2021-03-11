@@ -11,7 +11,7 @@ namespace BlazorFrontEnd.Data
     public class OrderService: IOrderService
     {
         private HttpClient client;
-        private string uri = "http://localhost";
+        private string uri = "http://177.10.10.11:81";
 
         public OrderService()
         {
