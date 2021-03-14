@@ -29,7 +29,7 @@ namespace RestWebApi
         {
 
             services.AddControllers();
-            services.AddScoped<ISocketToDb, SocketToDb>();
+            services.AddScoped<ISqlToDb, SqlToDb>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

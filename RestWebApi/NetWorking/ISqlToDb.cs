@@ -3,7 +3,7 @@ using RestWebApi.Data.Model;
 
 namespace RestWebApi.NetWorking
 {
-    public interface ISocketToDb
+    public interface ISqlToDb
     {
         Object getItems();
         Object getOrders();

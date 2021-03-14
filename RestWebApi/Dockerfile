@@ -6,6 +6,7 @@ WORKDIR /source
 COPY ./ ./aspnetapp/
 WORKDIR /source/aspnetapp
 RUN dotnet add package Swashbuckle.AspNetCore -v 6.1.0
+RUN dotnet add package System.Data.SqlClient -v 4.8.2
 RUN dotnet publish -c release -o /app --no-restore
 
 # final stage/image

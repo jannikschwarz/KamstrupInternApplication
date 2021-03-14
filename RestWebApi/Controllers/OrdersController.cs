@@ -11,11 +11,11 @@ namespace RestWebApi.Controllers
     [Route("[Controller]")]
     public class OrdersController : ControllerBase
     {
-        private ISocketToDb socketToDb;
+        private ISqlToDb sqlToDb;
 
-        public OrdersController(ISocketToDb socketToDb)
+        public OrdersController(ISqlToDb sqlToDb)
         {
-            this.socketToDb = socketToDb;
+            this.sqlToDb = sqlToDb;
         }
 
         [HttpGet]
@@ -23,7 +23,7 @@ namespace RestWebApi.Controllers
         {
             try
             {
-                List<Order> orders = (List<Order>) socketToDb.getOrders();
+                List<Order> orders = (List<Order>) sqlToDb.getOrders();
                 return Ok(orders);
             }
             catch (Exception e)
@@ -37,7 +37,7 @@ namespace RestWebApi.Controllers
         {
             try
             {
-                socketToDb.addOrder(newOrder);
+                sqlToDb.addOrder(newOrder);
             }
             catch (Exception e)
             {

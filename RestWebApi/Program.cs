@@ -22,7 +22,7 @@ namespace RestWebApi
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("http://177.10.10.11:81");
+                    webBuilder.UseUrls("http://localhost:81");
                 });
     }
 }

@@ -11,11 +11,11 @@ namespace RestWebApi.Controllers
     [Route("[Controller]")]
     public class ItemsController : ControllerBase
     {
-        private ISocketToDb socketToDb;
+        private ISqlToDb sqlToDb;
 
-        public ItemsController(ISocketToDb socketToDb)
+        public ItemsController(ISqlToDb sqlToDb)
         {
-            this.socketToDb = socketToDb;
+            this.sqlToDb = sqlToDb;
         }
         
         [HttpGet]
@@ -23,7 +23,7 @@ namespace RestWebApi.Controllers
         {
             try
             {
-                List<Item> items = (List<Item>) socketToDb.getItems();
+                List<Item> items = (List<Item>) sqlToDb.getItems();
                 return Ok(items);
             }
             catch (Exception e)
