@@ -5,6 +5,7 @@ WORKDIR /source
 # copy everything else and build app
 COPY ./ ./aspnetapp/
 WORKDIR /source/aspnetapp
+RUN dotnet add package Swashbuckle.AspNetCore -v 6.1.0
 RUN dotnet publish -c release -o /app --no-restore
 
 # final stage/image
