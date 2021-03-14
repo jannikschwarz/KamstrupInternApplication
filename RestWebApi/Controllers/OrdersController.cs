@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RestWebApi.Data.Model;
-using RestWebApi.Db;
+using RestWebApi.NetWorking;
 
 namespace RestWebApi.Controllers
 {
@@ -11,11 +11,11 @@ namespace RestWebApi.Controllers
     [Route("[Controller]")]
     public class OrdersController : ControllerBase
     {
-        private IDbOrderService orderService;
+        private ISocketToDb socketToDb;
 
-        public OrdersController(IDbOrderService orderService)
+        public OrdersController(ISocketToDb socketToDb)
         {
-            this.orderService = orderService;
+            this.socketToDb = socketToDb;
         }
 
         [HttpGet]
@@ -23,7 +23,7 @@ namespace RestWebApi.Controllers
         {
             try
             {
-                List<Order> orders = await orderService.getOrdersAsync();
+                List<Order> orders = (List<Order>) socketToDb.getOrders();
                 return Ok(orders);
             }
             catch (Exception e)
@@ -37,7 +37,7 @@ namespace RestWebApi.Controllers
         {
             try
             {
-                await orderService.addOrderAsync(newOrder);
+                socketToDb.addOrder(newOrder);
             }
             catch (Exception e)
             {

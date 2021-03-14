@@ -11,7 +11,7 @@ namespace BlazorFrontEnd.Data
     public class ItemService : IItemService
     {
         private readonly HttpClient client;
-        private string uri = "http://177.10.10.11:5002/";
+        private string uri = "http://177.10.10.11:81";
 
         public ItemService()
         {
@@ -20,7 +20,7 @@ namespace BlazorFrontEnd.Data
 
         public  async Task<List<Item>> getAllItemsAsync()
         {
-            Task<string> stringAsync = client.GetStringAsync(uri + "Items");
+            Task<string> stringAsync = client.GetStringAsync(uri + "/Items");
             string message = await stringAsync;
             List<Item> result = JsonSerializer.Deserialize<List<Item>>(message);
             return result;
