@@ -2,7 +2,7 @@
 
 namespace DataBase.Migrations
 {
-    public partial class initialcreate : Migration
+    public partial class intialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
